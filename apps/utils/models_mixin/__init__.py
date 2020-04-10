@@ -1,0 +1,1 @@
+from .mixin_slug_name import ModelWithSlugNameMixin

@@ -1,0 +1,1 @@
+from .permissions_mixins import StaffRequiredMixin
