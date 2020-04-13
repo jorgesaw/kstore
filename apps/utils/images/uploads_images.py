@@ -1,10 +1,17 @@
+# Python
+from uuid import uuid4
+
 
 def custom_upload_to(instance, filename):
-    """Custom upload image.
-    
-    Delete image for user.
-    """
+    """Custom upload picture function.
 
-    old_instance = Profile.objects.get(pk=instance.pk)
-    old_instance.avatar.delete()
-    return 'profiles_images/' + filename
+    Delete the old image saved as an avatar and set filename as random string.    
+    """
+    
+    old_instance = instance.__class__.objects.get(pk=instance.pk)
+    old_instance.picture.delete()
+
+    ext = filename.split('.')[-1]
+    filename = '{}.{}'.format(uuid4().hex, ext)
+    
+    return 'users/pictures/' + filename

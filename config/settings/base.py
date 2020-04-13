@@ -39,11 +39,11 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Users & Authentication
-#AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 # Apps
 DJANGO_APPS = [
-    #'apps.registration.apps.RegistrationAppConfig', # Prioritize at auth.
+    'apps.registration.apps.RegistrationAppConfig', # Prioritize at auth.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,7 +59,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'apps.core.apps.CoreAppConfig', 
+    'apps.core.apps.CoreAppConfig',
+    'apps.users.apps.UsersAppConfig', 
+    'apps.profiles.apps.ProfilesAppConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

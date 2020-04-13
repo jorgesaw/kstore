@@ -12,6 +12,15 @@ urlpatterns = [
     
     # Core app
     path('', include(('apps.core.urls', 'core'), namespace='core')),
+
+    path('', include(('apps.users.urls', 'users'), namespace='users')),
+    
+    # Auth
+    path('accounts/', include('django.contrib.auth.urls')), 
+    path('accounts/', include(('apps.registration.urls', 'registration'), namespace='registration')),
+
+    # Profiles
+    path('profiles/', include(('apps.profiles.urls', 'profiles'), namespace='profiles')),     
 ]
 
 if settings.DEBUG:
