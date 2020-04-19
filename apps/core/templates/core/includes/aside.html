@@ -28,11 +28,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Listar</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Nueva</a></li>
+            <li class="active"><a href="{% url 'inventories:categories' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'inventories:category-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
           </ul>
         </li>
-         <li class="treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Subcategorías</span>
             <span class="pull-right-container">
@@ -40,8 +40,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Listar</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Nueva</a></li>
+            <li class="active"><a href="{% url 'inventories:subcategories' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'inventories:subcategory-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -52,8 +52,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Listar</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Nuevo</a></li>
+            <li class="active"><a href="{% url 'inventories:products' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'inventories:product-create' %}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
           </ul>
         </li>
         

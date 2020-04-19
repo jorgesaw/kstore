@@ -2,6 +2,11 @@
 
 # Django
 from django.db import models
+from django.db.models.signals import pre_save 
+
+# Models
+from apps.utils.models_mixin import ModelWithSlugNameMixin
+
 
 class BaseModel(models.Model):
     """Base model.
@@ -23,7 +28,6 @@ class BaseModel(models.Model):
     modified = models.DateTimeField(
         'modified at', 
         auto_now=True, 
-        #verbose_name="Última actualización", 
         help_text='Date time on which the object was last modified.'
     )
         
@@ -43,3 +47,25 @@ class BaseModel(models.Model):
 
     def delete(self, *args, **kwargs):
         self.soft_delete()
+
+    def get_dict_fields_and_values(self):
+        return dict((field.name, field.value_to_string(self))
+                                            for field in self._meta.fields)
+
+
+class BaseModelWithSlugName(BaseModel):
+    """Base model with slug name.
+
+    BaseModel acts as an abstract base class from which every
+    model new in the project will inherit. This class provides
+    every table with the following attributes:
+        + slug_name (String): Store the slug name.
+    """
+    
+    slug_name = models.SlugField(max_length=255, unique=True, blank=True)
+
+    class Meta(BaseModel.Meta):
+        """Meta option."""
+
+        abstract = True
+

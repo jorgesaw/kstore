@@ -3,7 +3,6 @@
 # Utilities
 from django.utils.text import slugify
 
-
 class ModelWithSlugNameMixin:
     """Model with slug name mixin.
 
@@ -13,3 +12,4 @@ class ModelWithSlugNameMixin:
     def save(self, *args, **kwargs):
         self.slug_name = slugify(self.name)
         super(ModelWithSlugNameMixin, self).save(*args, **kwargs)
+

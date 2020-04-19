@@ -62,6 +62,7 @@ LOCAL_APPS = [
     'apps.core.apps.CoreAppConfig',
     'apps.users.apps.UsersAppConfig', 
     'apps.profiles.apps.ProfilesAppConfig',
+    'apps.inventories.apps.InventoriesAppConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

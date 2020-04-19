@@ -2,6 +2,7 @@
 
 # Django
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 # DjangoRestFramework
 from rest_framework import viewsets
@@ -14,6 +15,24 @@ from rest_framework.authentication import TokenAuthentication
 # DjangoFilters
 from django_filters.rest_framework import DjangoFilterBackend
 
+class ViewListByStatusMixin:
+    """View detail mixin.
+
+    Search the object by slug name.
+    """
+
+    def get_queryset(self):
+        return self.model.objects.filter(active=True)
+
+
+class ViewBaseMixin:
+    """View detail mixin.
+
+    Search the object by slug name.
+    """
+
+    def get_object(self):
+        return get_object_or_404(self.model, slug_name=self.kwargs['slug_name'])
 
 class ModelViewSetActionBasicMixin:
     """ Base View. 

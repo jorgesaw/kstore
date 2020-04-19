@@ -1,0 +1,7 @@
+{% extends 'core/base/crud/base_category_confirm_delete.html' %}
+{% load static %}
+{% block title %}{{block.super}}producto{% endblock %}
+
+{% block model_title%}Producto{%endblock%}
+{% block model_url_list%}{% url 'inventories:products' %}{% endblock %}
+

@@ -20,7 +20,10 @@ urlpatterns = [
     path('accounts/', include(('apps.registration.urls', 'registration'), namespace='registration')),
 
     # Profiles
-    path('profiles/', include(('apps.profiles.urls', 'profiles'), namespace='profiles')),     
+    path('profiles/', include(('apps.profiles.urls', 'profiles'), namespace='profiles')),
+
+    # Inventories
+    path('inventories/', include(('apps.inventories.urls', 'inventories'), namespace='inventories')),     
 ]
 
 if settings.DEBUG:

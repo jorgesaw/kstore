@@ -1,0 +1,8 @@
+{% extends 'core/base/crud/base_form.html' %}
+{% load static %}
+{% block title %}{{block.super}}a subcategoria{% endblock %}
+
+{% block model_title%}Subcategoria{%endblock%}
+{% block model_subtitle%}Nueva{% endblock %}
+{% block model_url_list%}{% url 'inventories:subcategories' %}{% endblock %}
+

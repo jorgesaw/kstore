@@ -13,5 +13,8 @@ def custom_upload_to(instance, filename):
 
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(uuid4().hex, ext)
-    
-    return 'users/pictures/' + filename
+
+    str_class = str(instance.__class__).split('.')[-1][:-2].lower()
+    path = '{}/pictures/'.format(str_class)
+
+    return path + filename
