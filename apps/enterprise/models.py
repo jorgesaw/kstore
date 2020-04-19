@@ -2,12 +2,14 @@
 
 # Django
 from django.db import models
+from django.db.models.signals import pre_save
 
 # Models
 from apps.utils.models import BaseModelWithSlugName
 
 # Utilities
 from apps.utils.images import custom_upload_to
+from apps.utils.text import pre_save_receiver_slug_name
 
 
 class Enterprise(BaseModelWithSlugName):
@@ -34,4 +36,4 @@ class Enterprise(BaseModelWithSlugName):
     def __str__(self):
         return '{}'.format(self.name)
 
-
+pre_save.connect(pre_save_receiver_slug_name, sender=Enterprise)
