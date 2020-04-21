@@ -1,35 +1,12 @@
-{% extends 'core/base/base.html' %}
+{% extends 'core/base/crud/base_model_list.html' %}
 {% load static %}
 {% block title %}Subcategorias{% endblock %}
-{% block content %}
-<section class="content-header">
-  <h1>
-    Subcategorias
-  </h1>
-</section>
-<section class="content">
-	<div class="box">
-		<div class="box-header">
-            {% if subcategory_list %}
-			    <h3 class="box-title ">Listado</h3>
-            {% else %}
-                <h3 class="box-title">Sin elementos para mostrar.</h3>
-            {% endif %}
-		</div>
-        <div>
-            <div class="col-lg-2">
-			    <a class= "btn btn-primary" href="{% url 'inventories:category-create' %}"><i class="fa fa-fw fa-plus"></i></a>
-		    </div>
-            <div class="col-lg-1">
-			    <a class= "btn btn-primary" href=""><i class="fa fa-fw fa-print"></i></a>
-		    </div>
-            <div class="col-lg-3">
-			    <a class= "btn btn-primary" href=""><i class="fa fa-fw fa-file"></i> PDF</a>
-		    </div>
-        </div>
-		<!-- /.box-header -->
-		{% if subcategory_list %}
-		<div class="box-body">
+    
+    {% block title_table %}Subcategoría{% endblock %}
+    {% block model_url_new %}{% url 'inventories:subcategory-create' %}{% endblock %}
+    {% block model_url_print %}{% url 'inventories:subcategory-reports' %}{% endblock %}
+
+    {% block table_content %}		
 			<table id="table" class="table table-bordered table-striped">
 			<thead>
 			<tr>
@@ -63,11 +40,10 @@
 			</tr>
 			</tfoot>
 			</table>
-			{% include 'core/includes/pagination.html' %} 
-		</div>
-		<!-- /.box-body -->
-		{% endif %}
-    </div>
-    <!-- /.box -->
-</section>
+
+
+    {% endblock %}
+
+{% block js_page %}
+
 {% endblock %}

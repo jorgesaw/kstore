@@ -5,8 +5,11 @@ from django.urls import path, include
 
 # Views
 from .views import categories as categories_views
+from .views import categories_reports as categories_reports_views 
 from .views import products as products_views
+from .views import products_reports as products_reports_views
 from .views import subcategories as subcategories_views
+from .views import subcategories_reports as subcategories_reports_views
 
 
 urlpatterns = [ 
@@ -15,16 +18,22 @@ urlpatterns = [
     path('categories/<slug:slug_name>/', categories_views.CategoryDetailView.as_view(), name='category'),
     path('categories/update/<slug:slug_name>/', categories_views.CategoryUpdate.as_view(), name='category-update'),
     path('categories/delete/<slug:slug_name>/', categories_views.CategoryDelete.as_view(), name='category-delete'),
+    
+    path('reports/categories/', categories_reports_views.render_pdf_categories_view, name='category-reports'),
 
     path('subcategories/', subcategories_views.SubCategoryListView.as_view(), name='subcategories'),
     path('subcategories/create/', subcategories_views.SubCategoryCreate.as_view(), name='subcategory-create'),
     path('subcategories/<slug:slug_name>/', subcategories_views.SubCategoryDetailView.as_view(), name='subcategory'),
     path('subcategories/update/<slug:slug_name>/', subcategories_views.SubCategoryUpdate.as_view(), name='subcategory-update'),
-    path('subcategories/delete/<slug:slug_name>/', subcategories_views.SubCategoryDelete.as_view(), name='subcategory-delete'), 
+    path('subcategories/delete/<slug:slug_name>/', subcategories_views.SubCategoryDelete.as_view(), name='subcategory-delete'),
+
+    path('reports/subcategories/', subcategories_reports_views.render_pdf_subcategories_view, name='subcategory-reports'), 
     
     path('products/', products_views.ProductListView.as_view(), name='products'),
     path('products/create/', products_views.ProductCreate.as_view(), name='product-create'),
     path('products/<slug:slug_name>/', products_views.ProductDetailView.as_view(), name='product'),
     path('products/update/<slug:slug_name>/', products_views.ProductUpdate.as_view(), name='product-update'),
-    path('products/delete/<slug:slug_name>/', products_views.ProductDelete.as_view(), name='product-delete'), 
+    path('products/delete/<slug:slug_name>/', products_views.ProductDelete.as_view(), name='product-delete'),
+    
+    path('reports/products/', products_reports_views.render_pdf_products_view, name='product-reports'), 
 ]

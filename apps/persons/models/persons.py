@@ -41,6 +41,14 @@ class Person(AbstractPerson):
     """Person class."""
     pass
 
+
+class PersonFiscal(AbstractPerson):
+    """Person fiscal class."""
+    
+    class Meta:
+        abstract = True
+
+
 class AbstractPersonWithUser(AbstractPerson):
     """Abstract person with user class."""
 

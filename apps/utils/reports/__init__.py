@@ -1,0 +1,1 @@
+from .init_config_xhtml2pdf import link_callback

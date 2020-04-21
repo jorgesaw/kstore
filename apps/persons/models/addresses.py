@@ -22,7 +22,8 @@ class Address(BaseModel, models.Model):
     floor = models.CharField(max_length=18, null=True, blank=True, verbose_name='Piso')
     departament = models.CharField(max_length=18, null=True, blank=True, verbose_name='Departamento')
 
-    type_address = models.CharField(max_length=12, choices=TYPE_ADDRESS_CHOICES, default=DEFAULT_TYPE_ADDRESS, verbose_name='Tipo de residencia')
+    type_address = models.CharField(max_length=12, choices=TYPE_ADDRESS_CHOICES, 
+                    default=DEFAULT_TYPE_ADDRESS, verbose_name='Tipo de residencia')
 
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Ciudad')
     person = models.ForeignKey(PersonWithUser, on_delete=models.CASCADE,  verbose_name='persona')
