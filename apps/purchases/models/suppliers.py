@@ -11,4 +11,3 @@ class Supplier(PersonFiscal):
         verbose_name = 'proveedor'
         verbose_name_plural = 'proveedores'
         
-

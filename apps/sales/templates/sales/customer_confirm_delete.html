@@ -1,0 +1,7 @@
+{% extends 'core/base/crud/base_model_confirm_delete.html' %}
+{% load static %}
+{% block title %}{{block.super}}cliente{% endblock %}
+
+{% block model_title%}Cliente{%endblock%}
+{% block model_url_list%}{% url 'sales:customers' %}{% endblock %}
+

@@ -27,6 +27,9 @@ urlpatterns = [
 
     # Purchases
     path('purchases/', include(('apps.purchases.urls', 'purchases'), namespace='purchases')),
+    
+    # Sales
+    path('sales/', include(('apps.sales.urls', 'sales'), namespace='sales')),
 ]
 
 if settings.DEBUG:

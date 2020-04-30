@@ -1,4 +1,4 @@
-"""Item purchase models."""
+"""Item sale models."""
 
 # Python
 from decimal import Decimal
@@ -14,7 +14,7 @@ from django.utils import timezone
 # Models
 from apps.utils.models import BaseModelWithoutStatus
 from apps.inventories.models import Product
-from apps.purchases.models import Purchase
+from .sales import Sale
 
 TAX_CHOICES = [
     ("0 %", 0.0), 
@@ -23,10 +23,10 @@ TAX_CHOICES = [
 ]
 
 
-class ItemPurchase(BaseModelWithoutStatus):
-    """Item purchase class."""
+class ItemSale(BaseModelWithoutStatus):
+    """Item sale class."""
 
-    supplier_price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name="Precio")
+    price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name='Precio')
     quantity = models.FloatField(default=1, verbose_name='Cantidad')
     discount = models.DecimalField(default=0.0, blank=True, max_digits=8, decimal_places=2, verbose_name="Descuento")
     
@@ -35,12 +35,12 @@ class ItemPurchase(BaseModelWithoutStatus):
     
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL, verbose_name="Producto")
  
-    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, verbose_name="Compra")
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE, verbose_name="Venta")
 
     class Meta:
         ordering = ['id',]
-        verbose_name = 'item compra'
-        verbose_name_plural = 'item compras'
+        verbose_name = 'item venta'
+        verbose_name_plural = 'item ventas'
         
 
     def calculate_subtotal(self):
@@ -51,18 +51,18 @@ class ItemPurchase(BaseModelWithoutStatus):
         self.total = self.subtotal - self.discount
 
     def save(self, *args, **kwargs):
-        super(ItemPurchase, self).save(*args, **kwargs)
+        super(ItemSale, self).save(*args, **kwargs)
         self.calculate_total()
 
-        super(ItemPurchase, self).save(update_fields=['total'])
+        super(ItemSale, self).save(update_fields=['total'])
 
     @transaction.atomic
     def delete(self, *args, **kwargs):
-        purchase = self.purchase
+        sale = self.sale
         product = self.product
         quantity = self.quantity
 
-        super(ItemPurchase, self).delete(*args, **kwargs)
+        super(ItemSale, self).delete(*args, **kwargs)
         purchase.calculate_total()
 
         stock = product.stock
@@ -74,16 +74,16 @@ class ItemPurchase(BaseModelWithoutStatus):
         return str(self.total)
 
 
-@receiver(post_save, sender=ItemPurchase)
+@receiver(post_save, sender=ItemSale)
 def update_total_sales_at_item(sender, instance, **kwargs):
-    instance.purchase.calculate_total()
+    instance.sale.calculate_total()
 
 
-@receiver(pre_save, sender=ItemPurchase)
+@receiver(pre_save, sender=ItemSale)
 def update_stock_in_article(sender, instance, **kwargs):
     try:
-        old_instance = ItemPurchase.objects.get(id=instance.id)
-    except ItemPurchase.DoesNotExist:
+        old_instance = ItemSale.objects.get(id=instance.id)
+    except ItemSale.DoesNotExist:
         old_instance = None
 
     if not old_instance:
@@ -94,5 +94,4 @@ def update_stock_in_article(sender, instance, **kwargs):
     if old_instance.product.stock:
         old_instance.product.stock += old_stock
         old_instance.product.save(update_fields=['stock',])
-    
 

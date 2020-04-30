@@ -56,7 +56,10 @@ class AbstractProduct(AbstractProductWithoutPrice):
 
 
 class Product(AbstractProduct):
-    pass
+    """Product class."""
+    
+    def __str__(self):
+        return '{} - {:.2f}'.format(self.name, self.price)
 
 pre_save.connect(pre_save_receiver_slug_name, sender=Product)
 

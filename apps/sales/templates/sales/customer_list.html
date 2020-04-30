@@ -1,0 +1,56 @@
+{% extends 'core/base/crud/base_model_list.html' %}
+{% load static %}
+{% block title %}Clientes{% endblock %}
+    
+    {% block title_table %}Clientes{% endblock %}
+    {% block model_url_new %}{% url 'sales:customer-create' %}{% endblock %}
+    {#{% block model_url_print %}{% url 'sales:customer-reports' %}{% endblock %}#}
+
+    {% block table_content %}		
+			<table id="table" class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>Código</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Celular</th>
+				<th>Acciones</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for object in object_list %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="{{ object.get_absolute_url }}">{{ object.id_card }}</td>
+				<td>{{ object.last_name|truncatechars:"30" }}</td>
+				<td>{{ object.first_name|truncatechars:"30" }}</td>
+				<td>{{ object.movile|default:"Sin número" }}</td>
+				<td>
+					<a href="{% url 'sales:customer' object.id %}"><i class="fa fa-fw fa-eye"></i></a>
+					{% if request.user.is_staff %}
+						<a href="{% url 'sales:customer-update' object.id %}"><i class="fa fa-fw fa-pencil"></i></a>
+						<a href="{% url 'sales:customer-delete' object.id %}"><i class="fa fa-fw fa-trash"></i></a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+			<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Código</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Celular</th>
+				<th>Acciones</th>
+			</tr>
+			</tfoot>
+			</table>
+
+
+    {% endblock %}
+
+{% block js_page %}
+
+{% endblock %}

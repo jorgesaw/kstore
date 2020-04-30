@@ -1,0 +1,73 @@
+{% extends 'core/base/crud/base_model_list.html' %}
+{% load static %}
+{% block title %}Ventas{% endblock %}
+    
+    {% block title_table %}Ventas{% endblock %}
+    {% block model_url_new %}{% url 'sales:sale-create' %}{% endblock %}
+    {#{% block model_url_print %}{% url 'sales:sale-reports' %}{% endblock %}#}
+
+    {% block table_content %}		
+			<table id="table" class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>N° Venta</th>
+				<th>Fecha de venta</th>
+				<th>Observaciones</th>
+				<th>Es fiscal</th>
+			    <th>N° Factura</th>
+			    <th>Cliente</th>
+			    <th>Total</th>
+				<th>Acciones</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for object in object_list %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="{{ object.get_absolute_url }}">{{ object.number_sale }}</td>
+				<td>{{ object.date_sale|date:"d-m-Y" }}</td>
+				<td>{{ object.observations|truncatechars:"50" }}</td>
+				<td>{{ object.is_fiscal|yesno:"SI,NO" }}</td>
+			    <td>{% if object.is_fiscal%} 
+                        {{ object.receipt_num|default:"" }}
+                        {% if object.receipt_date %} 
+                            | {{ object.receipt_date|date:"d-m-Y" }}
+                        {% endif %}  
+                    {% else %}
+                        - 
+                    {% endif %}
+                </td>
+                <td>{{ object.customer|default:"CLIENTE ANONIMO" }}</td>
+                <td>{{ object.total }}</td>
+				<td>
+					<a href="{% url 'purchases:purchase' object.id %}"><i class="fa fa-fw fa-eye"></i></a>
+					{% if request.user.is_staff %}
+						<a href="{% url 'sales:sale-update' object.id %}"><i class="fa fa-fw fa-pencil"></i></a>
+						<a href="{% url 'sales:sale-delete' object.id %}"><i class="fa fa-fw fa-trash"></i></a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+			<tfoot>
+			<tr>
+				<th>#</th>
+				<th>N° Venta</th>
+				<th>Fecha de venta</th>
+				<th>Observaciones</th>
+				<th>Es fiscal</th>
+			    <th>N° Factura</th>
+			    <th>Cliente</th>
+			    <th>Total</th>
+				<th>Acciones</th>
+			</tr>
+			</tfoot>
+			</table>
+
+
+    {% endblock %}
+
+{% block js_page %}
+
+{% endblock %}

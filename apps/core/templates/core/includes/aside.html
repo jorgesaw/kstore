@@ -82,6 +82,33 @@
             <li><a href="{% url 'purchases:purchase-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
           </ul>
         </li>
+        
+        <li class="header">Ventas</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Clientes</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{% url 'sales:customers' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'sales:customer-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Ventas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{% url 'sales:sales' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'sales:sale-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+          </ul>
+        </li>
+        
       </ul>
     </section>
     <!-- /.sidebar -->
