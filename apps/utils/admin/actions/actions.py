@@ -36,3 +36,15 @@ class ActionDownloadData:
         return response
     download_data_csv.short_description = "Descargar datos en CSV"
 
+
+class ActionFiscalStatus:
+    """Action fiscal status."""
+
+    def fiscal_emited(model_admin, request, queryset):
+        queryset.update(is_fiscal=True)
+    fiscal_emited.short_description = 'Nota fiscal emitida'
+
+    def fiscal_not_emited(model_admin, request, queryset):
+        queryset.update(is_fiscal=False)
+    fiscal_not_emited.short_description = 'Nota fiscal sin emitir'
+

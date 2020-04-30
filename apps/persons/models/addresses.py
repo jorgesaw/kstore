@@ -4,7 +4,7 @@
 from django.db import models
 
 # Models
-from .persons import PersonWithUser
+from .persons import Person
 from apps.locations.models import City
 from apps.utils.models import BaseModel
 
@@ -26,7 +26,7 @@ class Address(BaseModel, models.Model):
                     default=DEFAULT_TYPE_ADDRESS, verbose_name='Tipo de residencia')
 
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Ciudad')
-    person = models.ForeignKey(PersonWithUser, on_delete=models.CASCADE,  verbose_name='persona')
+    person = models.ForeignKey(Person, on_delete=models.CASCADE,  verbose_name='persona')
 
     class Meta:
         ordering = ['street', 'number_street']

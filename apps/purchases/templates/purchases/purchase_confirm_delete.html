@@ -1,0 +1,7 @@
+{% extends 'core/base/crud/base_model_confirm_delete.html' %}
+{% load static %}
+{% block title %}{{block.super}}compra{% endblock %}
+
+{% block model_title%}Compra{%endblock%}
+{% block model_url_list%}{% url 'purchases:purchases' %}{% endblock %}
+

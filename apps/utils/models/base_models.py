@@ -8,15 +8,14 @@ from django.db.models.signals import pre_save
 from apps.utils.models_mixin import ModelWithSlugNameMixin
 
 
-class BaseModel(models.Model):
-    """Base model.
+class BaseModelWithoutStatus(models.Model):
+    """Base model without status.
 
-    BaseModel acts as an abstract base class from which every
+    BaseModelWithoutStatus acts as an abstract base class from which every
     other model in the project will inherit. This class provides
     every table with the following attributes:
         + created (DateTime): Store the datetime the object was created.
         + modified (DateTime): Store the last datetime the object was modified.
-        + active (Boolean): Store the active object.
     """
 
     created = models.DateTimeField(
@@ -30,8 +29,6 @@ class BaseModel(models.Model):
         auto_now=True, 
         help_text='Date time on which the object was last modified.'
     )
-        
-    active = models.BooleanField(default=True, verbose_name="Activo")
 
     class Meta:
         """Meta option."""
@@ -40,6 +37,23 @@ class BaseModel(models.Model):
 
         get_latest_by = 'created'
         ordering = ['-created', '-modified']
+
+
+class BaseModel(BaseModelWithoutStatus):
+    """Base model.
+
+    BaseModel acts as an abstract base class from which every
+    other model in the project will inherit. This class provides
+    every table with the following attributes:
+        + active (Boolean): Store the active object.
+    """
+        
+    active = models.BooleanField(default=True, verbose_name="Activo")
+
+    class Meta:
+        """Meta option."""
+
+        abstract = True
 
     def soft_delete(self):
         self.active = False

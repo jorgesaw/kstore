@@ -1,0 +1,52 @@
+{% extends 'core/base/crud/base_form.html' %}
+{% load static %}
+{% block title %}{{block.super}}{% endblock %}
+
+{% block model_title%}{%endblock%}
+{% block forms_inline %}
+    
+        {% for formset in inlines %}
+            {{formset.management_form}}
+
+                {% for form in formset %}
+
+                    {% for hidden_field in form.hidden_fields %}
+					    {{ hidden_field }}
+				    {% endfor %}
+                    
+                    {% if form.non_field_errors %}
+					    <div class="panel panel-danger">
+						    <div class="panel-heading">Errores</div>
+							    {% for error in form.non_field_errors %}
+								    <div class="panel-content">{{ error|escape }}</div>
+							    {% endfor %}
+						    </div>
+					    </div>
+				    {% endif %}
+                    
+                    
+                            {% for field in form.visible_fields %}
+						        <div class="form-group">
+							        <label for="" class="col-sm-2 control-label"> {{ field.label_tag }}</label>
+							        <div class="col-sm-10">
+								        {{field}}						
+								        {% if field.errors %}
+									        {% for error in field.errors %}
+										        <p style="color: red">{{ error|escape }}</p>
+									        {% endfor %}
+								        {% endif %}
+								        {% if field.help_text %}
+									        <p class="help-block"><small>{{ field.help_text|safe }}</small></p>
+								        {% endif %}
+							        </div>
+						        </div>
+                                {% if formset.can_delete %}
+                                    <p>{{ form.DELETE }}</p>
+                                {% endif %}
+                        {% endfor %}
+                    
+                {% endfor %}
+
+        {% endfor %}
+    
+{% endblock %}

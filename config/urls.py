@@ -23,7 +23,10 @@ urlpatterns = [
     path('profiles/', include(('apps.profiles.urls', 'profiles'), namespace='profiles')),
 
     # Inventories
-    path('inventories/', include(('apps.inventories.urls', 'inventories'), namespace='inventories')),     
+    path('inventories/', include(('apps.inventories.urls', 'inventories'), namespace='inventories')), 
+
+    # Purchases
+    path('purchases/', include(('apps.purchases.urls', 'purchases'), namespace='purchases')),
 ]
 
 if settings.DEBUG:

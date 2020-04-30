@@ -1,0 +1,9 @@
+{% load static %}
+<script src="{% static 'core/js/formset/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $('.formset_row').formset({
+        addText: 'Agregar item',
+        deleteText: 'Eliminar',
+        prefix: 'itempurchase_set'
+    });
+</script>

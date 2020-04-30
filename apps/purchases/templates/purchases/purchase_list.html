@@ -1,0 +1,73 @@
+{% extends 'core/base/crud/base_model_list.html' %}
+{% load static %}
+{% block title %}Compras{% endblock %}
+    
+    {% block title_table %}Compras{% endblock %}
+    {% block model_url_new %}{% url 'purchases:purchase-create' %}{% endblock %}
+    {#{% block model_url_print %}{% url 'purchases:supplier-reports' %}{% endblock %}#}
+
+    {% block table_content %}		
+			<table id="table" class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>N° Compra</th>
+				<th>Fecha de compra</th>
+				<th>Observaciones</th>
+				<th>Es fiscal</th>
+			    <th>N° Factura</th>
+			    <th>Proveedor</th>
+			    <th>Total</th>
+				<th>Acciones</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for object in object_list %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="{{ object.get_absolute_url }}">{{ object.number_purchase }}</td>
+				<td>{{ object.date_purchase|date:"d-m-Y" }}</td>
+				<td>{{ object.observations|truncatechars:"50" }}</td>
+				<td>{{ object.is_fiscal|yesno:"SI,NO" }}</td>
+			    <td>{% if object.is_fiscal%} 
+                        {{ object.invoice_num|default:"" }}
+                        {% if object.invoice_date %} 
+                            | {{ object.invoice_date|date:"d-m-Y" }}
+                        {% endif %}  
+                    {% else %}
+                        - 
+                    {% endif %}
+                </td>
+                <td>{{ object.supplier|default:"SIN PROVEEDOR" }}</td>
+                <td>{{ object.total }}</td>
+				<td>
+					<a href="{% url 'purchases:purchase' object.id %}"><i class="fa fa-fw fa-eye"></i></a>
+					{% if request.user.is_staff %}
+						<a href="{% url 'purchases:purchase-update' object.id %}"><i class="fa fa-fw fa-pencil"></i></a>
+						<a href="{% url 'purchases:purchase-delete' object.id %}"><i class="fa fa-fw fa-trash"></i></a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+			<tfoot>
+			<tr>
+				<th>#</th>
+				<th>N° Compra</th>
+				<th>Fecha de compra</th>
+				<th>Observaciones</th>
+				<th>Es fiscal</th>
+				{% if object.is_fiscal%}
+					<th>N° Factura</th>
+				{% endif %}
+				<th>Acciones</th>
+			</tr>
+			</tfoot>
+			</table>
+
+
+    {% endblock %}
+
+{% block js_page %}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'core/base/crud/formset/base_formset_update.html' %}
+{% load static %}
+{% block title %}{{block.super}} proveedor{% endblock %}
+
+{% block model_title%}Proveedor{%endblock%}
+{% block model_subtitle%}Editar{% endblock %}
+{% block model_url_list%}{% url 'purchases:suppliers' %}{% endblock %}
+

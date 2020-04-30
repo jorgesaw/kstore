@@ -1,0 +1,105 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}Nueva compra{% endblock %}
+{% block content %}
+<section class="content-header">
+  <h1>
+    {% block model_title %} Compra {% endblock %}
+  </h1>
+</section>
+<section class="content">
+
+	<div class="col-md-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">{% block model_subtitle %} Nueva {% endblock %}</h3>
+			</div>
+			
+			<form class="form-horizontal" action="" method="post">{% csrf_token %}
+		    {# Formulario principal: COMPRAS #}
+		    
+				{% for hidden_field in form.hidden_fields %}
+					{{ hidden_field }}
+				{% endfor %}
+
+				{% if form.non_field_errors %}
+					<div class="panel panel-danger">
+						<div class="panel-heading">Errores</div>
+							{% for error in form.non_field_errors %}
+								<div class="panel-content">{{ error|escape }}</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+
+				<div class="box-body">
+					{% for field in form.visible_fields %}
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label"> {{ field.label_tag }}</label>
+							<div class="col-sm-10">
+								{{field}}						
+								{% if field.errors %}
+									{% for error in field.errors %}
+										<p style="color: red">{{ error|escape }}</p>
+									{% endfor %}
+								{% endif %}
+								{% if field.help_text %}
+									<p class="help-block"><small>{{ field.help_text|safe }}</small></p>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+                    {% block forms_inline %}
+                    {# Formulario en linea de los ITEMS DE COMPRAS #}
+                    
+                        <table class="table">
+            {{ item_purchases.management_form }}
+            {{ item_purchases.non_form_errors }}
+            
+            {% for form in item_purchases.forms %}
+                {% if forloop.first %}
+                    <thead>
+                    <tr>
+                        {% for field in form.visible_fields %}
+                            <th>{{ field.label|capfirst }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                {% endif %}
+                <tr class="{% cycle "row1" "row2" %} formset_row">
+                    {% for field in form.visible_fields %}
+                        <td>
+                            {# Include the hidden fields in the form #}
+                            {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>    
+                                
+                    {% endblock %}
+				</div>
+				<!-- /.box-body -->		
+				<div class="box-footer">
+					<div class="col-lg-offset-2 col-lg-10">
+						<input class= "btn btn-primary" type="submit" value="Agregar">
+						<a class= "btn btn-default" href="{% block model_url_list%}{% endblock %}">Volver</a>
+					</div>
+				</div>
+				<!-- /.box-footer -->
+			</form>
+		</div>
+		<!-- /.box -->
+	</div>
+	<!-- /.col -->
+</section>
+{% endblock %}
+{% block js_page %}
+    {% include 'core/base/crud/formset/formset_js.html' %}
+{% endblock %}

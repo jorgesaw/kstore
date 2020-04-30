@@ -1,12 +1,14 @@
 """Supliers model."""
 
-
 # Models
-from apps.inventories.models import PersonFiscal
+from apps.persons.models import PersonFiscal
 
 
 class Supplier(PersonFiscal):
     """Supplier class."""
 
-    pass
+    class Meta:
+        verbose_name = 'proveedor'
+        verbose_name_plural = 'proveedores'
+        
 

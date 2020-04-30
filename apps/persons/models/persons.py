@@ -15,7 +15,7 @@ class AbstractPerson(BaseModel, models.Model):
     """Abstract person model."""
 
     id_card = models.CharField(max_length=10, unique=True, verbose_name="DNI")
-    fiscal_id_card = models.CharField(max_length=10, unique=True, verbose_name="DNI")
+    fiscal_id_card = models.CharField(max_length=10, unique=True, verbose_name="CUIT")
     first_name = models.CharField(max_length=210, verbose_name="Nombre")
     last_name = models.CharField(max_length=210, verbose_name="Apellido")
     birth_date = models.DateField(null=True, blank=True, verbose_name="Fecha de nacimiento")
@@ -39,14 +39,14 @@ class AbstractPerson(BaseModel, models.Model):
 
 class Person(AbstractPerson):
     """Person class."""
+
     pass
 
 
-class PersonFiscal(AbstractPerson):
+class PersonFiscal(Person):
     """Person fiscal class."""
     
-    class Meta:
-        abstract = True
+    pass
 
 
 class AbstractPersonWithUser(AbstractPerson):

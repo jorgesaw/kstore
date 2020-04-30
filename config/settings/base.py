@@ -55,7 +55,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters', 
+    'extra_views'
 ]
 
 LOCAL_APPS = [

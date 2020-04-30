@@ -1,5 +1,6 @@
 from .persons import (
     Person, 
-    PersonWithUser
+    PersonWithUser, 
+    PersonFiscal
 )
 from .addresses import Address

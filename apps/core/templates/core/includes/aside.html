@@ -19,7 +19,7 @@
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Navegación principal</li>
+        <li class="header">Inventarios</li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Categorías</span>
@@ -57,8 +57,31 @@
           </ul>
         </li>
         
-        <li class="header">Navegación secundaria</li>
-        
+        <li class="header">Compras</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Proveedores</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{% url 'purchases:suppliers' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'purchases:supplier-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Compras</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{% url 'purchases:purchases' %}"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="{% url 'purchases:purchase-create' %}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
