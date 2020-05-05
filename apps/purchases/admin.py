@@ -39,11 +39,11 @@ class ItemPurchaseAdmin(admin.TabularInline):
 
     model = ItemPurchase
     autocomplete_fields = ('product',)
-    fields = ('product', 'supplier_price', 'quantity', 'subtotal', 'discount', 'total')
+    fields = ('product', 'price', 'quantity', 'subtotal', 'discount', 'total')
     readonly_fields = ('subtotal', 'total')
-    list_display = ('product', 'supplier_price', 'quantity', 'subtotal', 'discount', 'total')
+    list_display = ('product', 'price', 'quantity', 'subtotal', 'discount', 'total')
     ordering = ('id',)
-    list_editable = ('supplier_price', 'quantity', 'discount')
+    list_editable = ('price', 'quantity', 'discount')
     list_select_related = ('product',)
     extra = 1
 

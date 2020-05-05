@@ -13,6 +13,12 @@ from django.conf import settings
 # Messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+# Filters
+from apps.inventories.filters import SubCategoryFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
+
 # Forms 
 from apps.inventories.forms import SubCategoryForm
 
@@ -26,11 +32,12 @@ from apps.utils.views_mixin import (
 )
 
 
-class SubCategoryListView(ViewListByStatusMixin, ListView):
+class SubCategoryListView(FilteredListView):
     """Subcategory list view."""
 
     model = SubCategory
     paginate_by = 25
+    filterset_class = SubCategoryFilter
 
 class SubCategoryDetailView(ViewBaseMixin, DetailView):
     """Subcategory detail view."""

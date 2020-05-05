@@ -16,15 +16,18 @@
                 <h3 class="box-title">Sin elementos para mostrar.</h3>
             {% endif %}
 		</div>
-        
-        <div>
-        <div class="col-lg-2">
-	        <a class= "btn btn-primary" href="{% block model_url_new %}{% endblock %}"><i class="fa fa-fw fa-plus"></i></a>
-        </div>
-        <div class="col-lg-4">
-	        <a class= "btn btn-primary" href="{% block model_url_print %}{% endblock %}"><i class="fa fa-fw fa-print"></i></a>
-        </div>
-    </div>
+		<div class="box-body">
+            <div class="col-lg-1">
+	            <a class= "btn btn-primary" href="{% block model_url_new %}{% endblock %}"><i class="fa fa-fw fa-plus"></i></a>
+            </div>
+            <div class="col-lg-2">
+	            <a class= "btn btn-primary" href="{% block model_url_print %}{% endblock %}"><i class="fa fa-fw fa-print"></i></a>
+            </div>
+         </div>   
+        {% block filters %}
+            {% include 'core/base/crud/filters/base_filter_model.html' %}
+        {% endblock %}
+               
     <!-- /.box-header -->
 		{% if object_list %}
 		<div class="box-body">

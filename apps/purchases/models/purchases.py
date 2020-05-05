@@ -80,7 +80,7 @@ class Purchase(BaseModel):
         
         # Devuelve un diccionario con un dato cuya key es 'subtotal_purchase'
         _subtotal = self.itempurchase_set.all().aggregate(
-            subtotal_purchase=Sum( ( F('quantity') * F('supplier_price') ) - F('discount'), output_field=FloatField() )  
+            subtotal_purchase=Sum( ( F('quantity') * F('price') ) - F('discount'), output_field=FloatField() )  
         )['subtotal_purchase'] or 0
         
         self.subtotal = _subtotal

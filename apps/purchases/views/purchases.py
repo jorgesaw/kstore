@@ -22,6 +22,12 @@ from apps.purchases.forms import (
     PurchaseForm
 )
 
+# Filters
+from apps.purchases.filters import PurchaseFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
+
 # Models
 from apps.purchases.models import (
     Supplier, 
@@ -39,11 +45,12 @@ from apps.utils.permissions import StaffRequiredMixin
 from apps.utils.forms import CustomDateInput
 
 
-class PurchaseListView(ViewListByStatusMixin, ListView):
+class PurchaseListView(FilteredListView):
     """Purchase list view."""
 
     model = Purchase
     paginate_by = 25
+    filterset_class = PurchaseFilter
 
 
 class PurchaseDetailView(DetailView):

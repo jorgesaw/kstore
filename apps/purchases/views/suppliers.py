@@ -13,6 +13,12 @@ from django.conf import settings
 # Messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+# Filters
+from apps.purchases.filters import SupplierFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
+
 # Forms 
 from apps.purchases.forms import SupplierForm 
 from apps.persons.forms import (AddressInlineForm, AddressInlineUpdateForm)
@@ -37,11 +43,12 @@ from extra_views import (
 )
 
 
-class SupplierListView(ViewListByStatusMixin, ListView):
+class SupplierListView(FilteredListView):
     """Supplier list view."""
 
     model = Supplier
     paginate_by = 25
+    filterset_class = SupplierFilter
 
 
 class SupplierDetailView(DetailView):

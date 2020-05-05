@@ -26,7 +26,7 @@ TAX_CHOICES = [
 class ItemPurchase(BaseModelWithoutStatus):
     """Item purchase class."""
 
-    supplier_price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name="Precio")
+    price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name="Precio")
     quantity = models.FloatField(default=1, verbose_name='Cantidad')
     discount = models.DecimalField(default=0.0, blank=True, max_digits=8, decimal_places=2, verbose_name="Descuento")
     

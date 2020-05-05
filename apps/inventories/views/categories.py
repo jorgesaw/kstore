@@ -14,6 +14,12 @@ from django.shortcuts import get_object_or_404
 # Messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+# Filters
+from apps.inventories.filters import CategoryFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
+
 # Forms 
 from apps.inventories.forms import CategoryForm
 
@@ -27,11 +33,12 @@ from apps.utils.views_mixin import (
 ) 
 
 
-class CategoryListView(ViewListByStatusMixin, ListView):
+class CategoryListView(FilteredListView):
     """Category list view."""
 
     model = Category
     paginate_by = 25
+    filterset_class = CategoryFilter
 
 class CategoryDetailView(ViewBaseMixin, DetailView):
     """Category detail view."""

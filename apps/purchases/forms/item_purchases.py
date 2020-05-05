@@ -22,10 +22,10 @@ class BaseItemPurchaseInlineFormSet(BaseInlineFormSet):
             
         for form in self.forms:
             if form.cleaned_data:
-                supplier_price = form.cleaned_data['supplier_price']
+                price = form.cleaned_data['price']
                 quantity = form.cleaned_data['quantity']
                 
-                if (supplier_price and quantity) is not None:
+                if (price and quantity) is not None:
                      if not supplier_price > 0:
                         raise forms.ValidationError(
                             'Es obligatorio establecer un precio de compra al item', 
@@ -61,7 +61,7 @@ ItemPurchaseInlineFormSet = inlineformset_factory(
     ItemPurchase, 
     form=ItemPurchaseInlineForm,
     formset=BaseItemPurchaseInlineFormSet, 
-    fields=['product', 'supplier_price', 'quantity', 'subtotal', 'discount', 'total'], 
+    fields=['product', 'price', 'quantity', 'subtotal', 'discount', 'total'], 
     extra=1, 
     can_delete=True
 )

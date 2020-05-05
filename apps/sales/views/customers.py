@@ -13,6 +13,12 @@ from django.conf import settings
 # Messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+# Filters
+from apps.sales.filters import CustomerFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
+
 # Forms 
 from apps.sales.forms import CustomerForm 
 from apps.persons.forms import (AddressInlineForm, AddressInlineUpdateForm)
@@ -42,6 +48,13 @@ class CustomerListView(ViewListByStatusMixin, ListView):
 
     model = Customer
     paginate_by = 25
+
+class CustomerFilterListViev(FilteredListView):
+	"Customer filter list view."
+
+	model = Customer
+	paginate_by = 25
+	filterset_class = CustomerFilter
 
 
 class CustomerDetailView(DetailView):

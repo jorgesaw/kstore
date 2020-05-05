@@ -16,6 +16,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Django Messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+# Filters
+from apps.sales.filters import SaleFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
+
 # Forms 
 from apps.sales.forms import (
     ItemSaleInlineFormSet, 
@@ -45,6 +51,12 @@ class SaleListView(ViewListByStatusMixin, ListView):
     model = Sale
     paginate_by = 25
 
+class SaleFilterListView(FilteredListView):
+	"""Sale filter list view."""
+
+	model = Sale
+	paginate_by = 25
+	filterset_class = SaleFilter
 
 class SaleDetailView(DetailView):
     """Sale detail view."""

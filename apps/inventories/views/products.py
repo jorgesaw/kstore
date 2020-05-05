@@ -1,7 +1,6 @@
 """Products views."""
 
 # Django
-from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
@@ -12,6 +11,12 @@ from django.conf import settings
 
 # Messages
 from django.contrib.messages.views import SuccessMessageMixin
+
+# Filters
+from apps.inventories.filters import ProductFilter
+
+# Filters view
+from utils.views.filters import FilteredListView
 
 # Forms 
 from apps.inventories.forms import ProductForm, CategoryForm, ProductWithoutPriceForm
@@ -29,11 +34,14 @@ from apps.utils.views_mixin import (
 from apps.utils.permissions import StaffRequiredMixin
 
 
-class ProductListView(ViewListByStatusMixin, ListView):
+#class ProductListView(ViewListByStatusMixin, ListView):
+class ProductListView(FilteredListView):
     """Product list view."""
 
     model = Product
     paginate_by = 25
+    filterset_class = ProductFilter
+    
 
 class ProductDetailView(ViewBaseMixin, DetailView):
     """Product detail view."""

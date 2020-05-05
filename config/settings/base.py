@@ -195,3 +195,19 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
 }
+
+# Django filters
+
+def FILTERS_VERBOSE_LOOKUPS():
+    from django_filters.conf import DEFAULTS
+
+    verbose_lookups = DEFAULTS['VERBOSE_LOOKUPS'].copy()
+    verbose_lookups.update({
+        'gt': 'mayor que', 
+        'gte': 'mayor o igual que',
+        'lt': 'menor que', 
+        'lte': 'menor o igual que',
+        'contains': '', 
+        'icontains': '' 
+    })
+    return verbose_lookups
